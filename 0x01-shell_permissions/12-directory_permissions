@@ -1,2 +1,2 @@
 #!/bin/bash
-mkdir --mode=ugo+x,ug+r,u+w my_dir
+mkdir --mode=ugo+x,ug+r,u+w,o-r my_dir
