@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# a clock that outputs a looped time for 12:59
+hour=0
+while ((hour<=12)); do
+	echo "Hour: $hour";
+	minute=1;
+	while ((minute<60)); do
+		echo "$minute";
+		minute=$((minute + 1));
+	done
+	hour=$((hour + 1));
+done
