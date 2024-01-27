@@ -3,9 +3,9 @@
 # lot of junk
 i=$$;
 echo "$i" > /var/run/myscript.pid;
-trap "echo 'I hate the kill command'; rm -f /var/run/myscript.pid; kill '$i'" SIGTERM;
+trap "echo 'I hate the kill command'; rm -f /var/run/myscript.pid; kill '$i'; exit;" SIGTERM;
 trap "echo 'Y U no love me?!'" SIGINT;
-trap "rm -f /var/run/myscript.pid; kill '$i'" SIGQUIT;
+trap "rm -f /var/run/myscript.pid; kill '$i'; exit;" SIGQUIT;
 while ((1)); do
 	echo "To infinity and beyond";
 	sleep 2;
