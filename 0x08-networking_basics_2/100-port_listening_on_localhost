@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# nc -l localhost -p 98
+nc -l localhost -p 98
