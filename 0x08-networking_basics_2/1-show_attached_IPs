@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# show ip addrs
+ip addr show | grep "inet " | cut -d/ -f1 | awk '{print $2}'
