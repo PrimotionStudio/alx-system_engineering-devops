@@ -5,6 +5,8 @@
 
 apt-get update
 apt-get install -y nginx
+sudo mkdir -p /var/www/html
+echo "Hello World" > /var/www/html/index.html
 sudo mkdir -p /etc/nginx/sites-available
 cat <<EOF > /etc/nginx/sites-available/default
 server {
