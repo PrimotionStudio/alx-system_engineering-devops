@@ -2,24 +2,25 @@
 # Bash script that configures a new
 # Ubuntu machine to respect above requirements
 # this script will be run on the server itself)
-
 sudo su
-apt-get install
+apt-get update
 apt-get install -y nginx
-mkdir -p /var/www/html
-echo "Hello World" > /var/www/html/index.html
-mkdir -p /etc/nginx/sites-available
+echo "Hello World!" > /var/www/html/index.html;
 cat <<EOF > /etc/nginx/sites-available/default
 server {
     listen 80;
     listen [::]:80;
+
     root /var/www/html;
     index index.html index.htm index.nginx-debian.html;
+
     server_name _;
+
     location / {
         try_files $uri $uri/ =404;
         echo "Hello World!";
     }
 }
 EOF
+
 service nginx restart
