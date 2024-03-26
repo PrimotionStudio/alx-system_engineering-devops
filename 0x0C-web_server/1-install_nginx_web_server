@@ -5,6 +5,7 @@
 
 apt-get update
 apt-get install -y nginx
+sudo mkdir -p /etc/nginx/sites-available
 cat <<EOF > /etc/nginx/sites-available/default
 server {
     listen 80 default_server;
@@ -22,4 +23,4 @@ server {
 }
 EOF
 
-service nginx restart
+sudo service nginx restart
