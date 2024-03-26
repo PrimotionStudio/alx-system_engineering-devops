@@ -3,6 +3,8 @@
 # Ubuntu machine to respect above requirements
 # this script will be run on the server itself)
 
-apt-get -y install web-01
+sudo apt-get -y install
 
- ""
+printf "server {\n\tlisten 80;\n\tlisten [::]:80;\n\troot /var/www/html;\n\tindex index.html index.htm index.nginx-debian.html;\n\tserver_name _;\n\tlocation / {\n\ttry_files $uri $uri/ =404;\n\techo "Hello World!";\n\t}\n}" > /etc/nginx/sites-available/default
+
+/etc/init.d/nginx restart
