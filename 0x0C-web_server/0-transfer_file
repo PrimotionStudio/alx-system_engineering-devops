@@ -9,9 +9,9 @@ if [ $no_args -lt 4 ]; then
 	exit 1
 fi
 
-file_path="$1"
-ip="$2"
-username="$3"
-ssh_key="$4"
+file_path=$1
+ip=$2
+username=$3
+ssh_key=$4
 
 scp -o StrictHostKeyChecking=no "$file_path" -i "$ssh_key" "$username@$ip":~/

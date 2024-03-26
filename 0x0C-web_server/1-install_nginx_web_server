@@ -1,1 +1,8 @@
 #!/usr/bin/env bash
+# Bash script that configures a new
+# Ubuntu machine to respect above requirements
+# this script will be run on the server itself)
+
+apt-get -y install web-01
+
+ ""
