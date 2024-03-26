@@ -3,8 +3,23 @@
 # Ubuntu machine to respect above requirements
 # this script will be run on the server itself)
 
-sudo apt-get -y install
+apt-get update
+apt-get install -y nginx
+cat <<EOF > /etc/nginx/sites-available/default
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
 
-printf "server {\n\tlisten 80;\n\tlisten [::]:80;\n\troot /var/www/html;\n\tindex index.html index.htm index.nginx-debian.html;\n\tserver_name _;\n\tlocation / {\n\ttry_files $uri $uri/ =404;\n\techo "Hello World!";\n\t}\n}" > /etc/nginx/sites-available/default
+    root /var/www/html;
+    index index.html index.htm index.nginx-debian.html;
+
+    server_name _;
+
+    location / {
+        try_files $uri $uri/ =404;
+        echo "Hello World!";
+    }
+}
+EOF
 
 /etc/init.d/nginx restart
