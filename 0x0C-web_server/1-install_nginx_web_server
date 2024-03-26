@@ -6,8 +6,7 @@ sudo su
 apt-get update
 apt-get -y install nginx
 echo "Hello World!" > /var/www/html/index.html;
-cat <<EOF > /etc/nginx/sites-available/default
-server {
+printf "server {
     listen 80;
     listen [::]:80;
 
@@ -19,6 +18,5 @@ server {
     location / {
         try_files $uri $uri/ =404;
     }
-}
-EOF
+}" > /etc/nginx/sites-available/default
 /etc/init.d/nginx start
