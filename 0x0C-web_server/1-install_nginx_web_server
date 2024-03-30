@@ -2,11 +2,10 @@
 # Bash script that configures a new
 # Ubuntu machine to respect above requirements
 # this script will be run on the server itself)
-sudo su
-apt-get update
-apt-get -y install nginx
-echo "Hello World!" > /var/www/html/index.html;
-printf %s "server {
+sudo apt-get update
+sudo apt-get -y install nginx
+sudo echo "Hello World!" > /var/www/html/index.html;
+sudo printf %s "server {
     listen 80;
     listen [::]:80;
 
@@ -19,4 +18,4 @@ printf %s "server {
         try_files / =404;
     }
 }" > /etc/nginx/sites-available/default
-/etc/init.d/nginx start
+sudo /etc/init.d/nginx start
