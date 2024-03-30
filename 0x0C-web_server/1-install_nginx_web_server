@@ -4,8 +4,10 @@
 # this script will be run on the server itself)
 sudo apt-get update
 sudo apt-get -y install nginx
-sudo echo "Hello World!" > /var/www/html/index.html;
-sudo printf %s "server {
+sudo mkdir -p /var/www/html
+sudo sh -c 'echo "Hello World!" > /var/www/html/index.html'
+sudo tee /etc/nginx/sites-available/default > /dev/null <<EOF
+server {
     listen 80;
     listen [::]:80;
 
@@ -17,5 +19,6 @@ sudo printf %s "server {
     location / {
         try_files / =404;
     }
-}" > /etc/nginx/sites-available/default
-sudo /etc/init.d/nginx start
+}
+EOF
+sudo systemctl start nginx
