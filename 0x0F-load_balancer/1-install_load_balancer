@@ -1,1 +1,21 @@
 #!/usr/bin/env bash
+# Bash script that configures a new
+# Ubuntu machine to respect above requirements
+# this script will be run on the server itself)
+
+sudo apt-get update
+sudo apt-get -y install haproxy
+sudo service ufw stop
+sudo tee /etc/haproxy/haproxy.cfg > /dev/null <<EOF
+frontend alx_web
+        bind *:80
+        stats uri /haproxy?stats
+        default_backend alx_web_bknd
+
+backend alx_web_bknd
+        balance roundrobin
+        server web-01 54.172.82.3:80 check
+        server web-02 100.24.205.1:80 check
+
+EOF
+sudo systemctl start haproxy
