@@ -1,3 +1,5 @@
 #!/usr/bin/env bash
 # fix nginx on port :80
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 sudo service nginx restart
+kill "$(pgrep 'nginx' | head -1)"
