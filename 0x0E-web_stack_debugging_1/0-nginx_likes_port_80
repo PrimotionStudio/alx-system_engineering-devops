@@ -5,26 +5,10 @@
 sudo apt remove nginx
 sudo apt-get update
 sudo apt-get -y install nginx
-sudo tee /etc/nginx/sites-available/default > /dev/null <<EOF
-server {
-    listen 80;
-    listen [::]:80;
-
-    root /var/www/html;
-    index index.html index.htm index.nginx-debian.html;
-
-    server_name _;
-    location / {
-        try_files \$uri \$uri/ =404;
-    }
-    error_page 404 /404.html;
-    location = /404.html {
-        root /var/www/html/;
-        internal;
-    }
-}
-EOF
-
+if [ -z /etc/nginx/sites-available/default ]; then
+	sudo rm /etc/nginx/sites-available/default
+fi
+sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 sudo service nginx start
 sleep 5
 sudo service nginx restart
