@@ -1,1 +1,35 @@
 #!/usr/bin/env bash
+# a script to automate setting up firewall
+sudo apt update
+sudo apt upgrade
+sudo apt install ufw -y
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+sudo ufw allow 22/tcp
+sudo ufw enable
+sudo ufw status verbose
+# Define variables
+REDIRECT_FROM_PORT=8080
+REDIRECT_TO_PORT=80
+
+# Function to configure port redirection
+configure_port_redirection() {
+    # Check if iptables-persistent is installed
+    if ! dpkg -l | grep -q "iptables-persistent"; then
+        echo "iptables-persistent is not installed. Installing..."
+        sudo apt-get update
+        sudo apt-get install -y iptables-persistent
+    fi
+
+    # Add iptables rule for port redirection
+    sudo iptables -t nat -A PREROUTING -p tcp --dport $REDIRECT_FROM_PORT -j REDIRECT --to-port $REDIRECT_TO_PORT
+
+    # Save iptables rules
+    sudo iptables-save > /etc/iptables/rules.v4
+    echo "iptables rules saved."
+}
+
+# Main
+configure_port_redirection
+
+echo "Port redirection from $REDIRECT_FROM_PORT to $REDIRECT_TO_PORT configured successfully."
