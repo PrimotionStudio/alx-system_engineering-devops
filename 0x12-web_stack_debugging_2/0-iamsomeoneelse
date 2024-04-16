@@ -1,1 +1,3 @@
 #!/usr/bin/env bash
+# login to shell as someone else
+sudo -u $1 whoami
