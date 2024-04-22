@@ -4,8 +4,8 @@
  for a given employee ID, returns
  information about his/her TODO list progress.
 """
-import requests
 import json
+import requests
 from sys import argv
 
 
@@ -27,8 +27,9 @@ if __name__ == "__main__":
         if todo["completed"] is True:
             comp += 1
         total += 1
-    print("Employee {} is done with tasks({}/{}):".format(dict(res.json())["name"],
-                                                          comp, total))
+    print("Employee {} is done \
+          with tasks({}/{}):".format(dict(res.json())["name"],
+                                     comp, total))
     for todo in _res.json():
         if todo["completed"] is True:
             print("\t {}".format(todo["title"]))
