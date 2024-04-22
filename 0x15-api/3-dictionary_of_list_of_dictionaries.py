@@ -20,8 +20,8 @@ if __name__ == '__main__':
         user_id = user["id"]
         username = user["username"]
         tasks = []
-        url = "https://jsonplaceholder.typicode.com/todos?userId={}"
-              .format(user_id)
+        uri = "https://jsonplaceholder.typicode.com"
+        url = "{}/todos?userId={}".format(uri, user_id)
         _res = requests.get(url)
         if _res.status_code != 200:
             print("Failed:", _res.status_code)
