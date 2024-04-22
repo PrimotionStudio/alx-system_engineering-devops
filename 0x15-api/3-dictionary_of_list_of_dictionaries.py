@@ -9,7 +9,7 @@ from sys import argv
 
 
 if __name__ == '__main__':
-    url = "https://jsonplaceholder.typicode.com/users/"
+    url = "https://jsonplaceholder.typicode.com/users"
     res = requests.get(url)
     if res.status_code != 200:
         print("Failed:", res.status_code)
