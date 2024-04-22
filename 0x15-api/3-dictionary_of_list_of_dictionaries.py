@@ -14,21 +14,24 @@ if __name__ == '__main__':
     if res.status_code != 200:
         print("Failed:", res.status_code)
         exit()
-    url = "https://jsonplaceholder.typicode.com/todos"
-    _res = requests.get(url)
-    if _res.status_code != 200:
-        print("Failed:", _res.status_code)
-        exit()
-    user_id = dict(res.json())["id"]
-    username = dict(res.json())["username"]
-
     with open("todo_all_employees.json", "w") as f:
         f.write("")
-    tasks = []
-    for todo in _res.json():
-        task = {"username": username, "task": todo["title"],
-                "completed": todo["completed"]}
-        tasks.append(task)
-    records = {str(user_id): tasks}
+    records = {}
+    for user in res.json():
+        user_id = user["id"]
+        username = user["username"]
+        tasks = []
+        url = "https://jsonplaceholder.typicode.com/todos?userId={}"
+              .format(user_id)
+        _res = requests.get(url)
+        if _res.status_code != 200:
+            print("Failed:", _res.status_code)
+            exit()
+        for todo in _res.json():
+            task = {"username": username, "task": todo["title"],
+                    "completed": todo["completed"]}
+            tasks.append(task)
+        records.update({str(user_id): tasks})
+
     with open("todo_all_employees.json", "a") as f:
         json.dump(records, f)
