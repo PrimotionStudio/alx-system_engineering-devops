@@ -27,7 +27,8 @@ if __name__ == '__main__':
         f.write("")
     tasks = []
     for todo in _res.json():
-        task = {"task": todo["title"], "completed": todo["completed"], "username": username}
+        task = {"task": todo["title"],
+                "completed": todo["completed"], "username": username}
         tasks.append(task)
     records = {str(user_id): tasks}
     with open(str(user_id) + ".json", "a") as f:
