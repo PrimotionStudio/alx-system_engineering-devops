@@ -2,6 +2,7 @@
 """
 curl reddit api
 """
+import json
 import requests
 
 
@@ -20,5 +21,9 @@ def number_of_subscribers(subreddit):
             return count
         else:
             raise requests.exceptions.RequestException
-    except (requests.exceptions.RequestException, KeyError):
+    except (
+        requests.exceptions.RequestException,
+        KeyError,
+        json.decoder.JSONDecodeError,
+    ):
         return 0

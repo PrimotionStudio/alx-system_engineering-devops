@@ -2,6 +2,7 @@
 """
 curl reddit api
 """
+import json
 import requests
 
 
@@ -25,5 +26,9 @@ def top_ten(subreddit):
                 j += 1
         else:
             raise requests.exceptions.RequestException
-    except (requests.exceptions.RequestException, KeyError):
+    except (
+        requests.exceptions.RequestException,
+        KeyError,
+        json.decoder.JSONDecodeError,
+    ):
         return None
