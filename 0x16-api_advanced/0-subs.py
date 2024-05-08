@@ -9,13 +9,16 @@ def number_of_subscribers(subreddit):
     """
     a documentation
     """
-    ua = "linux:0x16.api.advanced:v1 (by /u/theprimotionstudio)"
+    ua = "alx"
     url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
     h = {"User-Agent": ua}
-    res = requests.get(url, headers=h, allow_redirects=False)
-    if res.status_code == 404:
-        return (0)
-    else:
-        data = res.json()
-        count = data["data"]["subscribers"]
-        return (count)
+    try:
+        res = requests.get(url, headers=h)
+        if res.status_code == 200:
+            data = res.json()
+            count = data["data"]["subscribers"]
+            return count
+        else:
+            raise requests.exceptions.RequestException
+    except (requests.exceptions.RequestException, KeyError):
+        return 0
