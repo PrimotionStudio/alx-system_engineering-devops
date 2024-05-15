@@ -1,1 +1,22 @@
-#!/usr/bin/env bash
+server {
+        listen 80 default_server;
+        listen [::]:80 default_server;
+        server_name 34.207.156.185 _;
+        add_header X-Served-By $HOSTNAME;
+        location /airbnb-onepage {
+                include proxy_params;
+                proxy_pass http://127.0.0.1:5000/airbnb-onepage;
+        }
+        location ~ ^/airbnb-dynamic/number_odd_or_even/(\d+)$ {
+                include proxy_params;
+                proxy_pass http://127.0.0.1:5001/number_odd_or_even/$1;
+        }
+        location ~ ^/number_odd_or_even/(\d+)$ {
+                include proxy_params;
+                proxy_pass http://127.0.0.1:5001/number_odd_or_even/$1;
+        }
+        location /api {
+                include proxy_params;
+                proxy_pass http://127.0.0.1:5002/api;
+        }
+}
