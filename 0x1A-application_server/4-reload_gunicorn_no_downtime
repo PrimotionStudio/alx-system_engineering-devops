@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 # Bull Crap, well damned
-sudo pkill -HUP -f 'gunicorn'
+# Find and reload Gunicorn processes gracefully
+ps auxf | grep 'gunicorn' | grep -v 'grep' | awk '{ print $2 }' |  xargs kill -HUP
