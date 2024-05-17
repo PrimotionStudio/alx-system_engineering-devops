@@ -1,3 +1,4 @@
+# Define a class to manage user configurations
 exec { 'change-os-configuration-for-holberton-user':
   command => [
     '/bin/bash -c "echo \'holberton soft nofile 4096\' >> /etc/security/limits.conf"',
