@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # Bull Crap, well damned
 # Find and reload Gunicorn processes gracefully
-ps auxf | grep 'gunicorn' | grep -v 'grep' | awk '{ print $2 }' |  xargs kill -HUP
+ps aux | grep 'gunicorn' | grep -v 'grep' | awk '{ print $2 }' |  xargs kill -HUP
